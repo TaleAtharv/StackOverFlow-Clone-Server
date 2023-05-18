@@ -86,19 +86,36 @@ app.get('/', (req, res) => {
 //     console.error(error.message);
 //   });
 
-  const connectToDatabase = async () => {
-    try {
-       mongoose.createConnection(CONNECT_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
-      console.log(`Connected to the database`);
-      app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+//   const connectToDatabase = async () => {
+//     try {
+//        await mongoose.createConnection(CONNECT_URL, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//       });
+//       console.log(`Connected to the database`);
+//       app.listen(PORT, () => {
+//         console.log(`Server running on port ${PORT}`);
+//       });
+//     } catch (error) {
+//       console.error(error.message);
+//     }
+//   };
   
-  connectToDatabase();
+//   connectToDatabase();
+
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect(CONNECT_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log('Connected to the database');
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+connectToDatabase();

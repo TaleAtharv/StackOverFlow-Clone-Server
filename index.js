@@ -66,7 +66,7 @@ app.use('/questions', questionsRoutes);
 app.use('/answer', answerRoutes);
 
 const PORT = 9999;
-const CONNECT_URL = process.env.CONNECTION_URL;
+const CONNECT_URL = 'mongodb+srv://admin:admin@stackoverflow.voyxp0c.mongodb.net/?retryWrites=true&w=majority';
 
 app.get('/', (req, res) => {
     res.send("This is a stack overflow clone API")
@@ -102,9 +102,9 @@ app.get('/', (req, res) => {
 //   };
   
 //   connectToDatabase();
-
 const connectToDatabase = async () => {
   try {
+    mongoose.set('strictQuery', false);
     await mongoose.connect(CONNECT_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true
